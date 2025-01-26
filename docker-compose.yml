@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  novnc-vm:
+    build: .
+    container_name: novnc-vm-container
+    ports:
+      - "4560:4560"  # Websockify port
+    volumes:
+      - /var/lib/libvirt/images  # Ensure persistence of VM images
+      - /opt/windows_iso  # Mount the directory for the Windows ISO
+    environment:
+      - DISPLAY=:0  # Display environment for noVNC
+    tty: true
+    stdin_open: true
